@@ -2,10 +2,14 @@
 
 namespace App\Providers;
 
+use App\Models\Bus;
+use App\Models\Trip;
+use App\Observers\BusObserver;
+use App\Observers\TripObserver;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\Event;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -19,6 +23,16 @@ class EventServiceProvider extends ServiceProvider
             SendEmailVerificationNotification::class,
         ],
     ];
+
+    /**
+     * Define observers to auto-register.
+     * @var array<class-string>
+     */
+    protected $observers = [
+        Bus::class => [BusObserver::class],
+        Trip::class => [TripObserver::class],
+    ];
+
 
     /**
      * Register any events for your application.
