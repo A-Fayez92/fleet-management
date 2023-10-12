@@ -81,18 +81,17 @@ class TripResource extends Resource
 
                         DateTimePicker::make('arrival_time')
                             ->required()
-                            ->minDate(fn ($get) => $get('departure_time'))
+                            ->minDate(now())
                             ->reactive()
                             ->placeholder(__('Arrival Time')),
 
                         DateTimePicker::make('departure_time')
-                            ->required()
                             ->minDate(now())
                             ->reactive()
                             ->placeholder(__('Departure Time')),
                     ])
                     ->reactive()
-                    ->hidden(fn ($get) => $get('bus_id') === null || $get('departure_station_id') === null || $get('arrival_station_id') === null)
+                    ->hidden(fn ($get) => $get('bus_id') === null || $get('departure_station_id') === null || $get('arrival_station_id') === null || $get('departure_time') === null || $get('arrival_time') === null)
                     ->relationship(),
 
 
@@ -129,7 +128,7 @@ class TripResource extends Resource
                     ->searchable(),
 
                 TextColumn::make('stops.station.name')
-                    ->label('Stops')
+                    ->label(__('Stops'))
                     ->sortable()
                     ->searchable(),
             ])

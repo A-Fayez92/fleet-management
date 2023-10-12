@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\TripController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,4 +32,16 @@ Route::group([
     Route::post('logout', [AuthController::class, 'logout']);
     Route::post('refresh', [AuthController::class, 'refresh']);
     Route::post('me', [AuthController::class, 'me']);
+});
+
+
+Route::group([
+
+    'middleware' => 'api',
+    'prefix' => 'trips'
+
+], function ($router) {
+
+    Route::get('/', [TripController::class, 'index']);
+    Route::post('/reserve', [ReservationController::class, 'store'])->middleware('auth:api');
 });

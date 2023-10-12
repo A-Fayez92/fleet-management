@@ -13,11 +13,10 @@ return new class extends Migration
     {
         Schema::create('trips', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->nullable();
             $table->foreignId('bus_id')->constrained()->onDelete('cascade');
-            $table->foreignId('departure_station_id')->constrained('stations')->onDelete('cascade');
+            $table->foreignId('departure_station_id')->nullable()->constrained('stations')->onDelete('cascade');
             $table->foreignId('arrival_station_id')->constrained('stations')->onDelete('cascade');
-            $table->foreignId('parent_id')->nullable()->constrained('trips')->onDelete('cascade');
             $table->dateTime('departure_time');
             $table->dateTime('arrival_time');
             $table->timestamps();

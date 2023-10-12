@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Trip;
+use App\Http\Resources\TripResource;
 use App\Http\Requests\StoreTripRequest;
 use App\Http\Requests\UpdateTripRequest;
-use App\Models\Trip;
 
 class TripController extends Controller
 {
@@ -13,7 +14,7 @@ class TripController extends Controller
      */
     public function index()
     {
-        //
+        return TripResource::collection(Trip::all());
     }
 
     /**

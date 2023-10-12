@@ -16,4 +16,22 @@ class EditBus extends EditRecord
             Actions\DeleteAction::make(),
         ];
     }
+
+    protected function afterSave(): void
+    {
+        $bus = $this->record;
+
+        try {
+            $bus->BusSeats()->delete();
+            $bus->BusSeats()->createMany(
+                array_map(
+                    fn ($seat) => ['number' => $seat],
+                    range(1, $bus->seats)
+                )
+            );
+        } catch (\Exception $e) {
+            $bus->update(['seats' => $bus->getOriginal('seats')]);
+            throw new \Exception($e->getMessage());
+        }
+    }
 }

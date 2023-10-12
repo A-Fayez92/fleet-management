@@ -4,8 +4,8 @@ namespace App\Models;
 
 use App\Models\Bus;
 use App\Models\Seat;
-use App\Models\Trip;
 use App\Models\Station;
+use App\Models\Reservation;
 use App\Models\StopStation;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -43,13 +43,13 @@ class Trip extends Model
         return $this->hasManyThrough(Seat::class, Bus::class);
     }
 
-    public function parent(): BelongsTo
-    {
-        return $this->belongsTo(Trip::class, 'parent_id');
-    }
-
     public function stops(): HasMany
     {
         return $this->hasMany(StopStation::class);
+    }
+
+    public function reservations(): HasMany
+    {
+        return $this->hasMany(Reservation::class);
     }
 }

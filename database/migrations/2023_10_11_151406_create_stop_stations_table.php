@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('trip_id')->constrained()->onDelete('cascade');
             $table->foreignId('station_id')->constrained()->onDelete('cascade');
             $table->dateTime('arrival_time');
-            $table->dateTime('departure_time');
+            $table->dateTime('departure_time')->nullable();
             $table->timestamps();
         });
     }

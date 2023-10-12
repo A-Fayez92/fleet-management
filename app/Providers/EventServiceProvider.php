@@ -29,8 +29,7 @@ class EventServiceProvider extends ServiceProvider
      * @var array<class-string>
      */
     protected $observers = [
-        Bus::class => [BusObserver::class],
-        Trip::class => [TripObserver::class],
+        //
     ];
 
 

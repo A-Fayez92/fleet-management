@@ -16,7 +16,7 @@ class SeatSeeder extends Seeder
         $buses = Bus::all();
 
         foreach ($buses as $bus) {
-            $bus->seats()->createMany([
+            $bus->BusSeats()->createMany([
                 ['number' => 1],
                 ['number' => 2],
                 ['number' => 3],

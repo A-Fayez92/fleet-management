@@ -28,6 +28,11 @@ class StopStation extends Model
         return $this->belongsTo(Station::class);
     }
 
-    
-    
+    public function scopeAvailableSeats($query)
+    {
+        return $this->trip->bus->BusSeats()->whereDoesntHave('reservations')
+            ->orWhereHas('reservations', function ($query) {
+                $query->where('arrival_station_id', '!=', $this->station_id);
+            })->get();
+    }
 }
