@@ -48,5 +48,5 @@ Email: test@example.com
 Password: password
 ```
 
-* You Can Find Postman Collection With All Required APIs in the root directory
+* You Can Find Postman Collection With All Required APIs in the root directory [HERE](https://github.com/A-Fayez92/fleet-management/blob/master/Fleet%20Management.postman_collection.json)
 
